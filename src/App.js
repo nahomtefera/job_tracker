@@ -44,6 +44,7 @@ class App extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.addJob = this.addJob.bind(this);
   }
 
   handleChange(el) {
@@ -62,6 +63,41 @@ class App extends Component {
       jobs: prevState
     })
   } 
+
+  addJob(){
+    let prevState = this.state.jobs;
+    let num_of_jobs = this.state.num_of_jobs;
+    num_of_jobs = num_of_jobs + 1;
+    let job_template = {
+      id: num_of_jobs,
+      title: "",
+      company: "",
+      location: "",
+      date: "",
+      contact_name: "",
+      contact_email: "",
+      contact_phone: "",
+      phone_interview_date: "",
+      phone_interview_time: "",
+      phone_interview_follow: false,
+      phone_interview_thanks: false,
+      skype_interview_date: "",
+      skype_interview_time: "",
+      skype_interview_follow: false,
+      skype_interview_thanks: false,
+      onsite_interview_date: "",
+      onsite_interview_time: "",
+      onsite_interview_follow: false,
+      onsite_interview_thanks: false,
+      offer: ""
+    }
+
+    prevState.push(job_template);
+    this.setState({
+      jobs: prevState,
+      num_of_jobs: num_of_jobs
+    })
+  }
 
   render() {
     return (
@@ -92,10 +128,12 @@ class App extends Component {
                 <input className="onsite_interview_time" placeholder="Onsite Interview Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
                 <input className="onsite_interview_follow" placeholder="Onsite Interview Follow Up" value={job.onsite_interview_follow} onChange={this.handleChange} /> <br/>
                 <input className="onsite_interview_thanks" placeholder="Onsite Interview Thanks" value={job.onsite_interview_thanks} onChange={this.handleChange} /> <br/>
-
+                <br/><br/><br/>
             </div>
           )
         })}
+        
+        <div className="add-job" onClick={this.addJob}> + </div>
       </div>
     );
   }
