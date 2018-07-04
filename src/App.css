@@ -1,0 +1,27 @@
+.job-main-container {
+    position: relative;
+}
+
+.rem-job {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+}
+
+.card-shadow {
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    -webkit-box-shadow: -3px 2px 27px -3px hsla(0,0%,70%,.252);
+    box-shadow: -3px 2px 27px -3px hsla(0,0%,70%,.252);
+}
+
+.container input{
+    margin: 5px 0;
+}
+
+.interviews-info-container {
+    display: inline-block;
+}
