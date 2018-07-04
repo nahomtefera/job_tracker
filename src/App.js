@@ -45,6 +45,7 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addJob = this.addJob.bind(this);
+    this.remJob = this.remJob.bind(this);
   }
 
   handleChange(el) {
@@ -99,12 +100,30 @@ class App extends Component {
     })
   }
 
+  remJob(el){
+    let parent_id = el.target.parentNode.id;
+    let prevState = this.state.jobs;
+    console.log(parent_id);
+
+    for(let i=0; i<prevState.length; i++) {
+      if(Number(prevState[i].id) === Number(parent_id)) {
+        prevState.splice(i, 1);
+      }
+    }
+
+    this.setState({
+      jobs: prevState
+    })
+  }
+
   render() {
     return (
       <div className="App">
         {this.state.jobs.map((job)=>{
           return (
             <div id={job.id} key={"job-" + job.id}>
+                {/* Rem job */}
+                <div onClick={this.remJob}> X </div>
                 {/* Job Info */}
                 <input className="title" placeholder="Job Title" value={job.title} onChange={this.handleChange} /> <br/>
                 <input className="company" placeholder="Company" value={job.company} onChange={this.handleChange} /> <br/>
