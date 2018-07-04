@@ -23,7 +23,7 @@ class App extends Component {
           location: "",
           date: "",
           contact_name: "",
-          contact_emal: "",
+          contact_email: "",
           contact_phone: "",
           phone_interview_date: "",
           phone_interview_time: "",
@@ -69,10 +69,29 @@ class App extends Component {
         {this.state.jobs.map((job)=>{
           return (
             <div id={job.id} key={"job-" + job.id}>
+                {/* Job Info */}
                 <input className="title" placeholder="Job Title" value={job.title} onChange={this.handleChange} /> <br/>
                 <input className="company" placeholder="Company" value={job.company} onChange={this.handleChange} /> <br/>
                 <input className="location" placeholder="Location" value={job.location} onChange={this.handleChange} /> <br/>
-                <input className="date" placeholder="Date" value={job.date} onChange={this.handleChange} /> <br/>
+                {/* Contact Info */}
+                <input className="contact_name" placeholder="Contact Name" value={job.contact_name} onChange={this.handleChange} /> <br/>
+                <input className="contact_email" placeholder="Contact Email" value={job.contact_email} onChange={this.handleChange} /> <br/>
+                <input className="contact_phone" placeholder="Contact Phone" value={job.contact_phone} onChange={this.handleChange} /> <br/>
+                {/* Phone Interview */}
+                <input className="phone_interview_date" placeholder="Phone Interview Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
+                <input className="phone_interview_time" placeholder="Phone Interview Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
+                <input className="phone_interview_follow" placeholder="Phone Interview Follow Up" value={job.phone_interview_follow} onChange={this.handleChange} /> <br/>
+                <input className="phone_interview_thanks" placeholder="Phone Interview Thanks" value={job.phone_interview_thanks} onChange={this.handleChange} /> <br/>
+                {/* Skype Interview */}
+                <input className="skype_interview_date" placeholder="Skype Interview Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
+                <input className="skype_interview_time" placeholder="Skype Interview Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
+                <input className="skype_interview_follow" placeholder="Skype Interview Follow Up" value={job.skype_interview_follow} onChange={this.handleChange} /> <br/>
+                <input className="skype_interview_thanks" placeholder="Skype Interview Thanks" value={job.skype_interview_thanks} onChange={this.handleChange} /> <br/>
+                {/* Skype Interview */}
+                <input className="onsite_interview_date" placeholder="Onsite Interview Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
+                <input className="onsite_interview_time" placeholder="Onsite Interview Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
+                <input className="onsite_interview_follow" placeholder="Onsite Interview Follow Up" value={job.onsite_interview_follow} onChange={this.handleChange} /> <br/>
+                <input className="onsite_interview_thanks" placeholder="Onsite Interview Thanks" value={job.onsite_interview_thanks} onChange={this.handleChange} /> <br/>
 
             </div>
           )
