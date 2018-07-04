@@ -136,41 +136,51 @@ class App extends Component {
             <div id={job.id} key={"job-" + job.id}>
                 {/* Rem job */}
                 <div onClick={this.remJob}> X </div>
+
+
                 {/* Job Info */}
                 <input className="title" placeholder="Job Title" value={job.title} onChange={this.handleChange} /> <br/>
                 <input className="company" placeholder="Company" value={job.company} onChange={this.handleChange} /> <br/>
                 <input className="location" placeholder="Location" value={job.location} onChange={this.handleChange} /> <br/>
+
+
                 {/* Contact Info */}
                 <input className="contact_name" placeholder="Contact Name" value={job.contact_name} onChange={this.handleChange} /> <br/>
                 <input className="contact_email" placeholder="Contact Email" value={job.contact_email} onChange={this.handleChange} /> <br/>
                 <input className="contact_phone" placeholder="Contact Phone" value={job.contact_phone} onChange={this.handleChange} /> <br/>
+
+
                 {/* Phone Interview */}
                 <input className="phone_interview_date" placeholder="Phone Interview Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
                 <input className="phone_interview_time" placeholder="Phone Interview Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
                 <div>
-                  <label>Interview Follow Up</label>
+                  <label>Follow Up Email</label>
                   <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_follow" checked = {job.phone_interview_follow ? "checked" : ""} /> <br/>
                 </div>
                 <div>
                   <label>Thanks Email</label>
                   <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_thanks" checked={job.phone_interview_thanks ? "checked" : ""} /> <br/>
                 </div>
+
+
                 {/* Skype Interview */}
                 <input className="skype_interview_date" placeholder="Skype Interview Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
                 <input className="skype_interview_time" placeholder="Skype Interview Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
                 <div>
-                  <label>Interview Follow Up</label>
+                  <label>Follow Up Email</label>
                   <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_follow" checked={job.skype_interview_follow ? "checked" : ""} /> <br/>
                 </div>
                 <div>
                   <label>Thanks Email</label>
                   <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_thanks" checked={job.skype_interview_thanks ? "checked" : ""} /> <br/>
                 </div>
+
+
                 {/* Skype Interview */}
                 <input className="onsite_interview_date" placeholder="Onsite Interview Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
                 <input className="onsite_interview_time" placeholder="Onsite Interview Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
                 <div>
-                  <label>Interview Follow Up</label>
+                  <label>Follow Up Email</label>
                   <input type="checkbox" onChange={this.handleCheckbox} className="onsite_interview_follow" checked={job.onsite_interview_follow ? "checked" : ""} /> <br/>
                 </div>
                 <div>
