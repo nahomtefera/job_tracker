@@ -30,7 +30,8 @@ class App extends Component {
           onsite_interview_thanks: false,
           benefits: "",
           type: "",
-          offer: ""
+          offer: "",
+          notes: ""
         },
       ],
       num_of_jobs: 1
@@ -106,7 +107,8 @@ class App extends Component {
       onsite_interview_thanks: false,
       benefits: "",
       type: "",
-      offer: ""
+      offer: "",
+      notes: ""
     }
 
     prevState.push(job_template);
@@ -163,8 +165,8 @@ class App extends Component {
                   {/* Phone Interview */}
                   <div className="phone-interview-container card-shadow container">
                     <h3 className="field-title">Phone Interview</h3>
-                    <input className="phone_interview_date" placeholder="Interview Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
-                    <input className="phone_interview_time" placeholder="Interview Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
+                    <input className="phone_interview_date" placeholder="Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
+                    <input className="phone_interview_time" placeholder="Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
                     <div className="checkbox-container">
                       <label>Follow Up Email</label>
                       <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_follow" checked = {job.phone_interview_follow ? "checked" : ""} /> <br/>
@@ -179,8 +181,8 @@ class App extends Component {
                   {/* Skype Interview */}
                   <div className="skype-interview-container card-shadow container">
                     <h3 className="field-title">Skype Interview</h3>
-                    <input className="skype_interview_date" placeholder="Interview Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
-                    <input className="skype_interview_time" placeholder="Interview Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
+                    <input className="skype_interview_date" placeholder="Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
+                    <input className="skype_interview_time" placeholder="Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
                     <div className="checkbox-container">
                       <label>Follow Up Email</label>
                       <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_follow" checked={job.skype_interview_follow ? "checked" : ""} /> <br/>
@@ -196,8 +198,8 @@ class App extends Component {
                   {/* On Site Interview */}
                   <div className="onsite-interview-container card-shadow container">
                     <h3 className="field-title">On Site Interview</h3>
-                    <input className="onsite_interview_date" placeholder="Interview Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
-                    <input className="onsite_interview_time" placeholder="Interview Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
+                    <input className="onsite_interview_date" placeholder="Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
+                    <input className="onsite_interview_time" placeholder="Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
                     <div className="checkbox-container">
                       <label>Follow Up Email</label>
                       <input type="checkbox" onChange={this.handleCheckbox} className="onsite_interview_follow" checked={job.onsite_interview_follow ? "checked" : ""} /> <br/>
