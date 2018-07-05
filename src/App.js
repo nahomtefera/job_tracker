@@ -229,8 +229,12 @@ class App extends Component {
                     <input className="offer" placeholder="$96,000 - $50/h" value={job.offer} onChange={this.handleChange} /> <br/>
                   </div>
 
+                  {/* Notes */}
+                  <div className="notes-container notes-modal container">
+                    <h3 className="field-title">Notes</h3>
+                    <textarea className="notes" placeholder="Notes" value={job.notes} onChange={this.handleChange} /> <br/>
+                  </div>
 
-                  <br/><br/><br/>
               </div>
             )
           })}

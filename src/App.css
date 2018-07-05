@@ -26,6 +26,39 @@
     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
 }
 
+.fadeOut {
+    display: none;
+    -webkit-animation-name: slideOutLeft;
+    animation-name: slideOutLeft;
+    -webkit-animation-duration: 1s;animation-duration: 1s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+}
+
+.notes-modal {
+    margin-top: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
+    position: relative;
+    width: 100%;
+    top: 0;
+    background: white;
+    min-height: 760px;
+    min-width: 50vw;
+    -webkit-animation: slideLeft 2s;    
+    animation: slideLeft 2s;
+    display:none;
+}
+
+.notes {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 700px;
+    outline: none;
+}
+
 .container input{
     border: none;
     font-size: 1em;
@@ -102,4 +135,44 @@
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+@-webkit-keyframes slideLeft{
+    from{
+        right:-300px;opacity:0
+    } 
+    to{
+        right:0;opacity:1
+    }
+}
+
+@keyframes slideLeft{
+    from{
+        right:-300px;opacity:0
+    } 
+    to{
+        right:0;opacity:1
+    }
+}
+
+@-webkit-keyframes slideOutLeft{
+    from{
+        left:0;
+        opacity:1
+    } 
+    to{
+        left:-300px;
+        opacity:0;
+    }
+}
+
+@keyframes slideOutLeft{
+    from{
+        left:0;
+        opacity:1
+    } 
+    to{
+        left:-300px;
+        opacity:0;
+    }
 }
