@@ -12,6 +12,7 @@
 
 .job-main-container {
     position: relative;
+    animation: fadein 2s;
 }
 
 .card-shadow {
@@ -88,5 +89,10 @@
 }
 
 .job-main-container:nth-child(even) .job-info-container, .job-main-container:nth-child(even) .field-title{
-    background: #d66c34;
+    background: #079992;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
