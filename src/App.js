@@ -31,7 +31,8 @@ class App extends Component {
           benefits: "",
           type: "",
           offer: "",
-          notes: ""
+          notes: "",
+          showNotes: false
         },
       ],
       num_of_jobs: 1
@@ -41,6 +42,25 @@ class App extends Component {
     this.addJob = this.addJob.bind(this);
     this.remJob = this.remJob.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.toggleNotes = this.toggleNotes.bind(this);
+  }
+
+  toggleNotes(el){
+    let parent_id = el.target.parentNode.id;
+    let prevState = this.state.jobs;
+
+    for(let i=0; i<prevState.length; i++) {
+      if(Number(parent_id) === Number(prevState[i].id)) {
+        if(prevState[i].showNotes === false) {
+          prevState[i].showNotes = true
+        } else {
+          prevState[i].showNotes = false
+        }
+      }
+    }
+    this.setState({
+      jobs: prevState
+    })
   }
 
   handleChange(el) {
@@ -108,7 +128,8 @@ class App extends Component {
       benefits: "",
       type: "",
       offer: "",
-      notes: ""
+      notes: "",
+      showNotes: false
     }
 
     prevState.push(job_template);
@@ -229,8 +250,11 @@ class App extends Component {
                     <input className="offer" placeholder="$96,000 - $50/h" value={job.offer} onChange={this.handleChange} /> <br/>
                   </div>
 
+                  {/* Show Notes */}
+                  <div className="show-notes-button" onClick={this.toggleNotes}> {job.showNotes? "Hide Notes" : "Show notes"} </div>
+
                   {/* Notes */}
-                  <div className="notes-container notes-modal container">
+                  <div className={job.showNotes ? "notes-container notes-modal container" : "hide-notes"}>
                     <h3 className="field-title">Notes</h3>
                     <textarea className="notes" placeholder="Notes" value={job.notes} onChange={this.handleChange} /> <br/>
                   </div>
