@@ -38,25 +38,44 @@
 .show-notes-button {
     position: relative;
     display: inline-block;
-    -webkit-animation: slideRight 1s;    
+    -webkit-animation: slideRight 1s;
     animation: slideRight 1s;
+    margin: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    font-size: 1.2em;
+    color: #e85656;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hide-notes-button {
+    position: absolute;
+    display: inline-block;
+    z-index: 999;
+    font-size: 3em;
+    margin-left: 10px;
+    color: white;
+    margin-top: -9px;
+    cursor: pointer;
 }
 
 .notes-modal {
-    margin-top: 0;
+    margin-top: -30px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     vertical-align: top;
-    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 0px 500px 1000px rgba(19, 19, 19, 0.8);
+    box-shadow: 0px 0px 500px 1000px rgba(19, 19, 19, 0.8);
     position: relative;
     width: 100%;
     top: 0;
     background: white;
     min-height: 760px;
     min-width: 50vw;
-    -webkit-animation: slideLeft 1s;    
-    animation: slideLeft 1s;
+    -webkit-animation: slideRight 1s;    
+    animation: slideRight 1s;
     z-index: 1;
 }
 
@@ -71,6 +90,8 @@
     resize: none;
     outline: none;
     border: none;
+    padding: 25px;
+    font-size: 1.4em;
 }
 
 .container input{
@@ -91,6 +112,8 @@
     font-weight: bold;
     color: crimson;
     font-size: 1.3em;
+    -webkit-animation: slideRight 1s;    
+    animation: slideRight 1s;
 }
 
 .add-job {
