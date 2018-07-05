@@ -80,7 +80,7 @@
     margin: 0 20px;
 }
 
-.offer-container, .benefits-container {
+.offer-container, .benefits-container, .type-container {
     min-height: 0;
 }
 

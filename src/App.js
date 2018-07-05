@@ -29,6 +29,7 @@ class App extends Component {
           onsite_interview_follow: false,
           onsite_interview_thanks: false,
           benefits: "",
+          type: "",
           offer: ""
         },
       ],
@@ -104,6 +105,7 @@ class App extends Component {
       onsite_interview_follow: false,
       onsite_interview_thanks: false,
       benefits: "",
+      type: "",
       offer: ""
     }
 
@@ -207,18 +209,25 @@ class App extends Component {
                   </div>
                   <br/>
 
+                  {/* Benefits */}
+                  <div className="type-container card-shadow container">
+                    <h3 className="field-title">Job Type</h3>
+                    <input className="type" placeholder="Full-Time, Contract..." value={job.type} onChange={this.handleChange} /> <br/>
+                  </div>  
+
+                  {/* Benefits */}
+                  <div className="benefits-container card-shadow container">
+                    <h3 className="field-title">Benefits</h3>
+                    <input className="benefits" placeholder="PTO, Gym, Dental..." value={job.benefits} onChange={this.handleChange} /> <br/>
+                  </div>                  
+
                   {/* Offer */}
                   <div className="offer-container card-shadow container">
                     <h3 className="field-title">Offer</h3>
                     <input className="offer" placeholder="$96,000 - $50/h" value={job.offer} onChange={this.handleChange} /> <br/>
                   </div>
 
-                  {/* Benefits */}
-                  <div className="benefits-container card-shadow container">
-                    <h3 className="field-title">Benefits</h3>
-                    <input className="benefits" placeholder="PTO, Gym, Dental" value={job.benefits} onChange={this.handleChange} /> <br/>
-                  </div>                  
-                  
+
                   <br/><br/><br/>
               </div>
             )
