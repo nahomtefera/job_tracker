@@ -163,11 +163,11 @@ class App extends Component {
             return (
               <div className="job-main-container" id={job.id} key={"job-" + job.id}>
                   {/* Rem job */}
-                  <div className="rem-job" onClick={this.remJob}> x </div>
+                  <div className={job.showNotes ? "fadeOut" :"rem-job"} onClick={this.remJob}> x </div>
 
 
                   {/* Job Info */}
-                  <div className="job-info-container card-shadow container">
+                  <div className={job.showNotes ? "fadeOut" : "job-info-container card-shadow container"}>
                     <input className="title" placeholder="Job Title" value={job.title} onChange={this.handleChange} />
                     <input className="company" placeholder="Company" value={job.company} onChange={this.handleChange} />
                     <input className="location" placeholder="Location" value={job.location} onChange={this.handleChange} />
@@ -175,7 +175,7 @@ class App extends Component {
 
 
                   {/* Contact Info */}
-                  <div className="contact-info-container card-shadow container">
+                  <div className= {job.showNotes ? "fadeOut" : "contact-info-container card-shadow container"}>
                     <h3 className="field-title">Contact Info</h3>
                     <input className="contact_name" placeholder="Contact Name" value={job.contact_name} onChange={this.handleChange} /> <br/>
                     <input className="contact_email" placeholder="Contact Email" value={job.contact_email} onChange={this.handleChange} /> <br/>
@@ -184,7 +184,7 @@ class App extends Component {
 
 
                   {/* Phone Interview */}
-                  <div className="phone-interview-container card-shadow container">
+                  <div className= {job.showNotes ? "fadeOut" : "phone-interview-container card-shadow container"}>
                     <h3 className="field-title">Phone Interview</h3>
                     <input className="phone_interview_date" placeholder="Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
                     <input className="phone_interview_time" placeholder="Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
@@ -200,7 +200,7 @@ class App extends Component {
 
 
                   {/* Skype Interview */}
-                  <div className="skype-interview-container card-shadow container">
+                  <div className={job.showNotes ? "fadeOut" : "skype-interview-container card-shadow container"}>
                     <h3 className="field-title">Skype Interview</h3>
                     <input className="skype_interview_date" placeholder="Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
                     <input className="skype_interview_time" placeholder="Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
@@ -217,7 +217,7 @@ class App extends Component {
 
 
                   {/* On Site Interview */}
-                  <div className="onsite-interview-container card-shadow container">
+                  <div className={job.showNotes ? "fadeOut" : "onsite-interview-container card-shadow container"}>
                     <h3 className="field-title">On Site Interview</h3>
                     <input className="onsite_interview_date" placeholder="Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
                     <input className="onsite_interview_time" placeholder="Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
@@ -233,19 +233,19 @@ class App extends Component {
                   <br/>
 
                   {/* Benefits */}
-                  <div className="type-container card-shadow container">
+                  <div className={job.showNotes ? "fadeOut" : "type-container card-shadow container"}>
                     <h3 className="field-title">Job Type</h3>
                     <input className="type" placeholder="Full-Time, Contract..." value={job.type} onChange={this.handleChange} /> <br/>
                   </div>  
 
                   {/* Benefits */}
-                  <div className="benefits-container card-shadow container">
+                  <div className={job.showNotes ? "fadeOut" : "benefits-container card-shadow container"}>
                     <h3 className="field-title">Benefits</h3>
                     <input className="benefits" placeholder="PTO, Gym, Dental..." value={job.benefits} onChange={this.handleChange} /> <br/>
                   </div>                  
 
                   {/* Offer */}
-                  <div className="offer-container card-shadow container">
+                  <div className={job.showNotes ? "fadeOut" : "offer-container card-shadow container"}>
                     <h3 className="field-title">Offer</h3>
                     <input className="offer" placeholder="$96,000 - $50/h" value={job.offer} onChange={this.handleChange} /> <br/>
                   </div>

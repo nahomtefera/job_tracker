@@ -16,6 +16,7 @@
 }
 
 .card-shadow {
+    position: relative;
     margin: 20px;
     min-height: 210px;
     margin-top: 0;
@@ -24,18 +25,21 @@
     vertical-align: top;
     -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
+    -webkit-animation: slideRight 1s;    
+    animation: slideRight 1s;
 }
 
 .fadeOut {
-    display: none;
-    -webkit-animation-name: slideOutLeft;
-    animation-name: slideOutLeft;
-    -webkit-animation-duration: 1s;animation-duration: 1s;
-    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    position: absolute;
+    visibility: hidden;
+    z-index: -1;
 }
 
 .show-notes-button {
+    position: relative;
     display: inline-block;
+    -webkit-animation: slideRight 1s;    
+    animation: slideRight 1s;
 }
 
 .notes-modal {
@@ -51,8 +55,9 @@
     background: white;
     min-height: 760px;
     min-width: 50vw;
-    -webkit-animation: slideLeft 2s;    
-    animation: slideLeft 2s;
+    -webkit-animation: slideLeft 1s;    
+    animation: slideLeft 1s;
+    z-index: 1;
 }
 
 .hide-notes {
@@ -63,7 +68,9 @@
     width: 100%;
     box-sizing: border-box;
     min-height: 700px;
+    resize: none;
     outline: none;
+    border: none;
 }
 
 .container input{
@@ -155,31 +162,33 @@
 
 @keyframes slideLeft{
     from{
-        right:-300px;opacity:0
+        right:-300px;
+        opacity:0
     } 
     to{
-        right:0;opacity:1
+        right:0;
+        opacity:1
     }
 }
 
-@-webkit-keyframes slideOutLeft{
+@-webkit-keyframes slideRight{
     from{
-        left:0;
-        opacity:1
+        left:-300px;
+        opacity:0
     } 
     to{
-        left:-300px;
-        opacity:0;
+        left:0;
+        opacity:1
     }
 }
 
-@keyframes slideOutLeft{
+@keyframes slideRight{
     from{
-        left:0;
-        opacity:1
+        left:-300px;
+        opacity:0
     } 
     to{
-        left:-300px;
-        opacity:0;
+        left:0;
+        opacity:1
     }
 }
