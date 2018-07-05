@@ -1,16 +1,23 @@
+.App {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.app-wrapper {
+    display: inline-block;
+    position: relative;
+    padding-top: 2em;
+}
+
 .job-main-container {
     position: relative;
 }
 
-.rem-job {
-    position: absolute;
-    top: 5px;
-    left: 20px;
-}
-
 .card-shadow {
-    padding: 20px;
     margin: 20px;
+    min-height: 210px;
+    margin-top: 0;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
@@ -19,9 +26,67 @@
 }
 
 .container input{
-    margin: 5px 0;
+    border: none;
+    font-size: 1em;
+    outline: none;
+    margin: 10px 20px;
 }
 
 .interviews-info-container {
     display: inline-block;
+}
+
+.rem-job {
+    position: absolute;
+    top: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: crimson;
+    font-size: 1.3em;
+}
+
+.add-job {
+    position: absolute;
+    right: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    color: green;
+    font-size: 1.8em;
+}
+
+.job-info-container {
+    display: flex;
+    background: #3b78bb;
+    min-height: 0px !important;
+}
+
+.job-info-container input {
+    border: none;
+    font-size: 1em;
+    outline: none;
+    flex:1 1 auto;
+    color: white;
+    background: none;
+}
+
+.job-info-container input::placeholder {
+    color: white
+}
+
+.checkbox-container {
+    margin: 0 20px;
+}
+
+.field-title {
+    text-align: center;
+    font-weight: lighter;
+    background: #3b78bb;
+    color: white;
+    letter-spacing: 1px;
+    margin-top: 0;
+    padding: 10px;
+}
+
+.job-main-container:nth-child(even) .job-info-container, .job-main-container:nth-child(even) .field-title{
+    background: #d66c34;
 }
