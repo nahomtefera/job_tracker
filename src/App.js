@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import Job from './components/job/job';
 import './App.css';
+import rem_icon from './images/rem_icon.png';
 
 class App extends Component {
   constructor(props) {
@@ -159,7 +159,7 @@ class App extends Component {
   }
 
   remJob(el){
-    let parent_id = el.target.parentNode.id;
+    let parent_id = el.target.parentNode.parentNode.id;
     let prevState = this.state.jobs;
     console.log(parent_id);
 
@@ -182,12 +182,15 @@ class App extends Component {
             return (
               <div className="job-main-container" id={job.id} key={"job-" + job.id}>
                   {/* Rem job */}
-                  <div className={job.showNotes ? "fadeOut" :"rem-job"} onClick={this.remJob}> x </div>
+                  <div className={job.showNotes ? "fadeOut" :"rem-job"}> 
+                    <img src={rem_icon} onClick={this.remJob} />
+                  </div>
 
 
                   {/* Job Info */}
                   <div className={job.showNotes ? "fadeOut" : "job-info-container card-shadow container"}>
-                    <input className="title" placeholder="Job Title" value={job.title} onChange={this.handleChange} />
+                    <h3 className="field-title">Job Info</h3>
+                    <input className="title" placeholder="Title" value={job.title} onChange={this.handleChange} />
                     <input className="company" placeholder="Company" value={job.company} onChange={this.handleChange} />
                     <input className="location" placeholder="Location" value={job.location} onChange={this.handleChange} />
                   </div>
@@ -270,13 +273,15 @@ class App extends Component {
                   </div>
 
                   {/* Show Notes */}
-                  <div className={job.showNotes? "fadeOut" : "show-notes-button"} onClick={this.showNotes}>  Notes » </div>
+                  <div className={job.showNotes? "fadeOut" : "show-notes-button"} onClick={this.showNotes}> 
+                    Notes » 
+                  </div>
 
                   {/* Notes */}
                   <div className={job.showNotes ? "notes-container notes-modal container" : "hide-notes"}>
                     <div className={job.showNotes? "hide-notes-button" : ""} onClick={this.hideNotes}>«</div>
                     <h3 className="field-title">Notes</h3>
-                    <textarea className="notes" placeholder="Notes" value={job.notes} onChange={this.handleChange} /> <br/>
+                    <textarea className="notes" placeholder="Job description, cover letter, notes..." value={job.notes} onChange={this.handleChange} /> <br/>
                   </div>
 
               </div>

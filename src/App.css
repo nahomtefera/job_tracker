@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
+
 .App {
     position: relative;
     display: flex;
     justify-content: center;
+    font-family: 'Lato', sans-serif;
+    padding-bottom: 15em;
 }
 
 .app-wrapper {
@@ -12,7 +16,9 @@
 
 .job-main-container {
     position: relative;
-    animation: fadein 2s;
+    margin-top: 5em;
+    -webkit-animation: slideRight 1s;    
+    animation: slideRight 1s;
 }
 
 .card-shadow {
@@ -27,6 +33,7 @@
     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
     -webkit-animation: slideRight 1s;    
     animation: slideRight 1s;
+    color: #424f79;
 }
 
 .fadeOut {
@@ -40,14 +47,25 @@
     display: inline-block;
     -webkit-animation: slideRight 1s;
     animation: slideRight 1s;
-    margin: 25px;
-    font-weight: bold;
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 1.4px;
-    font-size: 1.2em;
-    color: #e85656;
+    letter-spacing: 2px;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 20px;
+    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
+    font-size: 1em;
+    outline: none;
+    margin: 10px 20px;
+    background: #F8BBD0;
+    color: white;
+    border: 1px solid #F8BBD0;
+}
+
+.show-notes-button:hover {
+    background: white;
+    color: #e43872;    
+    border: 1px solid #e43872;
 }
 
 .hide-notes-button {
@@ -57,7 +75,7 @@
     font-size: 3em;
     margin-left: 10px;
     color: white;
-    margin-top: -9px;
+    margin-top: -14px;
     cursor: pointer;
 }
 
@@ -99,6 +117,7 @@
     font-size: 1em;
     outline: none;
     margin: 10px 20px;
+    color: #424f79;
 }
 
 .interviews-info-container {
@@ -108,12 +127,14 @@
 .rem-job {
     position: absolute;
     top: 5px;
+    margin-left: -5px;
     cursor: pointer;
-    font-weight: bold;
-    color: crimson;
-    font-size: 1.3em;
     -webkit-animation: slideRight 1s;    
     animation: slideRight 1s;
+}
+
+.rem-job img {
+    width: 16px;
 }
 
 .add-job {
@@ -126,8 +147,7 @@
 }
 
 .job-info-container {
-    display: flex;
-    background: #3b78bb;
+    display: block;
     min-height: 0px !important;
 }
 
@@ -136,14 +156,14 @@
     font-size: 1em;
     outline: none;
     flex:1 1 auto;
-    color: white;
     background: none;
-    font-weight: bold;
-    text-transform: uppercase;
+    font-weight: 400;
+    /* text-transform: uppercase; */
+    width: 29%;
+    box-sizing: border-box;
 }
 
 .job-info-container input::placeholder {
-    color: white
 }
 
 .checkbox-container {
@@ -156,8 +176,9 @@
 
 .field-title {
     text-align: center;
-    font-weight: lighter;
-    background: #3b78bb;
+    font-weight: 300;
+    font-size: 1em;
+    background: #03a9f4;
     color: white;
     letter-spacing: 1px;
     margin-top: 0;
@@ -165,8 +186,8 @@
     padding: 10px;
 }
 
-.job-main-container:nth-child(even) .job-info-container, .job-main-container:nth-child(even) .field-title{
-    background: #079992;
+.job-main-container:nth-child(even) .field-title{
+    background: #4caf50;
 }
 
 @keyframes fadein {
