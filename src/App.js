@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import rem_icon from './images/rem_icon.png';
-import my_keys from './config.js';
+import {DB_CONFIG} from './firebase.js';
+import firebase from 'firebase';
 
 class App extends Component {
   constructor(props) {
@@ -39,12 +40,21 @@ class App extends Component {
       num_of_jobs: 1
     }
 
+    // Initialize Firebase
+    this.app = firebase.initializeApp(DB_CONFIG);
+    this.db = firebase.database().ref().child("jobs")
+
+    // CRUD methods to update job info
     this.handleChange = this.handleChange.bind(this);
     this.addJob = this.addJob.bind(this);
     this.remJob = this.remJob.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.showNotes = this.showNotes.bind(this);
     this.hideNotes = this.hideNotes.bind(this);
+
+  }
+
+  componentWillMount(){
 
   }
 
