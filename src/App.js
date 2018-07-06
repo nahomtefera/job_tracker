@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import rem_icon from './images/rem_icon.png';
+import my_keys from './config.js';
 
 class App extends Component {
   constructor(props) {
