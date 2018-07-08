@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       loading: "true",
       jobs: [],
-      num_of_jobs: 1
+      num_of_jobs: 0
     }
 
 
@@ -30,15 +30,17 @@ class App extends Component {
     this.hideNotes = this.hideNotes.bind(this);
 
   }
-
+  // Everytime we start the app
+  // we will make an API call to firebase
+  // And update the state with the jobs in the database
   componentWillMount(){
     var prevJobs = this.state.jobs;
-    var num_of_jobs = this.state.num_of_jobs + 1;
     var self = this;
     // DataSnapshot
     this.db.on("child_added", snap => {
-      console.log(snap)
+      console.log(snap.val())
       prevJobs.push({
+        key: snap.key,
         id: snap.val().id,
         title: snap.val().title,
         company: snap.val().company,
@@ -64,10 +66,24 @@ class App extends Component {
         offer: snap.val().offer,
         notes: snap.val().notes,
         showNotes: false
-      })
+      });
+      
       self.setState({
         jobs: prevJobs,
         num_of_jobs: snap.val().id
+      })
+    })
+
+    this.db.on("child_removed", snap => {
+      
+      for(let i=0; i<prevJobs.length; i++){
+        if(prevJobs[i].key === snap.key){
+          prevJobs.splice(i, 1);
+        }
+      }
+
+      this.setState({
+        jobs: prevJobs,
       })
     })
 
@@ -78,7 +94,7 @@ class App extends Component {
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
-      if(parent_id === prevState[i].id) {
+      if(Number(parent_id) === Number(prevState[i].id)) {
         if(prevState[i].showNotes === false) {
           prevState[i].showNotes = true
         } else {
@@ -90,12 +106,13 @@ class App extends Component {
       jobs: prevState
     })
   }
+
   hideNotes(el){
     let parent_id = el.target.parentNode.parentNode.id;
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
-      if(parent_id === prevState[i].id) {
+      if(Number(parent_id) === Number(prevState[i].id)) {
         if(prevState[i].showNotes === false) {
           prevState[i].showNotes = true
         } else {
@@ -189,14 +206,10 @@ class App extends Component {
     console.log(parent_id);
 
     for(let i=0; i<prevState.length; i++) {
-      if(prevState[i].id === parent_id) {
-        prevState.splice(i, 1);
+      if(prevState[i].id == parent_id) {
+        this.db.child(prevState[i].key).remove()
       }
-    }
-
-    this.setState({
-      jobs: prevState
-    })
+    }    
   }
 
   render() {
