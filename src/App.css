@@ -126,11 +126,12 @@
 
 .rem-job {
     position: absolute;
-    top: 5px;
-    margin-left: -5px;
+    top: 10px;
+    margin-left: 33px;
     cursor: pointer;
-    -webkit-animation: slideRight 1s;    
+    -webkit-animation: slideRight 1s;
     animation: slideRight 1s;
+    z-index: 9;
 }
 
 .rem-job img {
@@ -178,7 +179,7 @@
     text-align: center;
     font-weight: 300;
     font-size: 1em;
-    background: #03a9f4;
+    background: #4ca5c3;
     color: white;
     letter-spacing: 1px;
     margin-top: 0;
@@ -187,7 +188,7 @@
 }
 
 .job-main-container:nth-child(even) .field-title{
-    background: #4caf50;
+    background: #43a27d;
 }
 
 @keyframes fadein {
