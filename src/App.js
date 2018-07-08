@@ -36,6 +36,12 @@ class App extends Component {
   componentWillMount(){
     var prevJobs = this.state.jobs;
     var self = this;
+
+    setTimeout(function(){ 
+      self.setState({loading:false})
+    }, 1500);
+
+
     // DataSnapshot
     this.db.on("child_added", snap => {
       console.log(snap.val())
@@ -214,21 +220,20 @@ class App extends Component {
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
-      if(prevState[i].id == parent_id) {
+      if(Number(prevState[i].id) === Number(parent_id)) {
         this.db.child(prevState[i].key).remove()
       }
     }    
   }
 
   render() {
-    // if (this.state.loading === 'initial') {
-    //   return <h2>Intializing...</h2>;
-    // }
-
-
-    // if (this.state.loading === 'true') {
-    //   return <h2>Loading...</h2>;
-    // }
+    if (this.state.loading === 'true') {
+      return (
+        <div className="loader-container">
+          <div className="loader">Loading...</div>
+        </div>
+      )
+    }
 
     return (
       <div className="App">
