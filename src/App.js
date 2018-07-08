@@ -2,47 +2,24 @@ import React, { Component } from 'react';
 import './App.css';
 import rem_icon from './images/rem_icon.png';
 import {DB_CONFIG} from './firebase.js';
-import firebase from 'firebase';
+import firebase from "firebase/app";
+import 'firebase/database';
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      jobs: [
-        {
-          id: 1,
-          title: "",
-          company: "",
-          location: "",
-          date: "",
-          contact_name: "",
-          contact_email: "",
-          contact_phone: "",
-          phone_interview_date: "",
-          phone_interview_time: "",
-          phone_interview_follow: false,
-          phone_interview_thanks: false,
-          skype_interview_date: "",
-          skype_interview_time: "",
-          skype_interview_follow: false,
-          skype_interview_thanks: false,
-          onsite_interview_date: "",
-          onsite_interview_time: "",
-          onsite_interview_follow: false,
-          onsite_interview_thanks: false,
-          benefits: "",
-          type: "",
-          offer: "",
-          notes: "",
-          showNotes: false
-        },
-      ],
-      num_of_jobs: 1
-    }
 
     // Initialize Firebase
     this.app = firebase.initializeApp(DB_CONFIG);
-    this.db = firebase.database().ref().child("jobs")
+    this.db = this.app.database().ref().child("jobs")
+
+  
+    this.state = {
+      loading: "true",
+      jobs: [],
+      num_of_jobs: 1
+    }
+
 
     // CRUD methods to update job info
     this.handleChange = this.handleChange.bind(this);
@@ -55,6 +32,44 @@ class App extends Component {
   }
 
   componentWillMount(){
+    var prevJobs = this.state.jobs;
+    var num_of_jobs = this.state.num_of_jobs + 1;
+    var self = this;
+    // DataSnapshot
+    this.db.on("child_added", snap => {
+      console.log(snap)
+      prevJobs.push({
+        id: snap.val().id,
+        title: snap.val().title,
+        company: snap.val().company,
+        location: snap.val().location,
+        date: snap.val().date,
+        contact_name: snap.val().contact_name,
+        contact_email: snap.val().contact_email,
+        contact_phone: snap.val().contact_phone,
+        phone_interview_date: snap.val().phone_interview_date,
+        phone_interview_time: snap.val().phone_interview_time,
+        phone_interview_follow: false,
+        phone_interview_thanks: false,
+        skype_interview_date: snap.val().skype_interview_date,
+        skype_interview_time: snap.val().skype_interview_time,
+        skype_interview_follow: false,
+        skype_interview_thanks: false,
+        onsite_interview_date: snap.val().onsite_interview_date,
+        onsite_interview_time: snap.val().onsite_interview_time,
+        onsite_interview_follow: false,
+        onsite_interview_thanks: false,
+        benefits: snap.val().benefits,
+        type: snap.val().type,
+        offer: snap.val().offer,
+        notes: snap.val().notes,
+        showNotes: false
+      })
+      self.setState({
+        jobs: prevJobs,
+        num_of_jobs: snap.val().id
+      })
+    })
 
   }
 
@@ -63,7 +78,7 @@ class App extends Component {
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
-      if(Number(parent_id) === Number(prevState[i].id)) {
+      if(parent_id === prevState[i].id) {
         if(prevState[i].showNotes === false) {
           prevState[i].showNotes = true
         } else {
@@ -80,7 +95,7 @@ class App extends Component {
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
-      if(Number(parent_id) === Number(prevState[i].id)) {
+      if(parent_id === prevState[i].id) {
         if(prevState[i].showNotes === false) {
           prevState[i].showNotes = true
         } else {
@@ -100,7 +115,7 @@ class App extends Component {
     let prevState = this.state.jobs;
     
     for(let i=0; i<prevState.length; i++){
-      if(Number(parent_id) === Number(prevState[i].id)){
+      if(parent_id === prevState[i].id){
         prevState[i][el_class] = val
       }
     }
@@ -116,7 +131,7 @@ class App extends Component {
     let prevState = this.state.jobs;
     
     for(let i=0; i<prevState.length; i++){
-      if(Number(parent_id) === Number(prevState[i].id)){
+      if(parent_id === prevState[i].id){
         if(prevState[i][el_class] === true){
           prevState[i][el_class] = false
         } else {
@@ -131,10 +146,10 @@ class App extends Component {
   }
 
   addJob(){
-    let prevState = this.state.jobs;
     let num_of_jobs = this.state.num_of_jobs;
     num_of_jobs = num_of_jobs + 1;
-    let job_template = {
+
+    this.db.push().set({
       id: num_of_jobs,
       title: "",
       company: "",
@@ -160,13 +175,12 @@ class App extends Component {
       offer: "",
       notes: "",
       showNotes: false
-    }
+    })
 
-    prevState.push(job_template);
     this.setState({
-      jobs: prevState,
       num_of_jobs: num_of_jobs
     })
+  
   }
 
   remJob(el){
@@ -175,7 +189,7 @@ class App extends Component {
     console.log(parent_id);
 
     for(let i=0; i<prevState.length; i++) {
-      if(Number(prevState[i].id) === Number(parent_id)) {
+      if(prevState[i].id === parent_id) {
         prevState.splice(i, 1);
       }
     }
@@ -186,6 +200,15 @@ class App extends Component {
   }
 
   render() {
+    // if (this.state.loading === 'initial') {
+    //   return <h2>Intializing...</h2>;
+    // }
+
+
+    // if (this.state.loading === 'true') {
+    //   return <h2>Loading...</h2>;
+    // }
+
     return (
       <div className="App">
         <div className="app-wrapper">
@@ -194,7 +217,7 @@ class App extends Component {
               <div className="job-main-container" id={job.id} key={"job-" + job.id}>
                   {/* Rem job */}
                   <div className={job.showNotes ? "fadeOut" :"rem-job"}> 
-                    <img src={rem_icon} onClick={this.remJob} />
+                    <img src={rem_icon} onClick={this.remJob} alt="remove-job" />
                   </div>
 
 
