@@ -51,16 +51,16 @@ class App extends Component {
         contact_phone: snap.val().contact_phone,
         phone_interview_date: snap.val().phone_interview_date,
         phone_interview_time: snap.val().phone_interview_time,
-        phone_interview_follow: false,
-        phone_interview_thanks: false,
+        phone_interview_follow: snap.val().phone_interview_follow,
+        phone_interview_thanks: snap.val().phone_interview_thanks,
         skype_interview_date: snap.val().skype_interview_date,
         skype_interview_time: snap.val().skype_interview_time,
-        skype_interview_follow: false,
-        skype_interview_thanks: false,
+        skype_interview_follow: snap.val().skype_interview_follow,
+        skype_interview_thanks: snap.val().skype_interview_thanks,
         onsite_interview_date: snap.val().onsite_interview_date,
         onsite_interview_time: snap.val().onsite_interview_time,
-        onsite_interview_follow: false,
-        onsite_interview_thanks: false,
+        onsite_interview_follow: snap.val().onsite_interview_follow,
+        onsite_interview_thanks: snap.val().onsite_interview_thanks,
         benefits: snap.val().benefits,
         type: snap.val().type,
         offer: snap.val().offer,
@@ -86,6 +86,7 @@ class App extends Component {
         jobs: prevJobs,
       })
     })
+
 
   }
 
@@ -130,10 +131,13 @@ class App extends Component {
     let el_class = el.target.className;
     let parent_id = el.target.parentNode.parentNode.id;
     let prevState = this.state.jobs;
-    
+    let update = {};
+    update[el_class] = val;
+
     for(let i=0; i<prevState.length; i++){
-      if(parent_id === prevState[i].id){
-        prevState[i][el_class] = val
+      if(Number(parent_id) === Number(prevState[i].id)){
+        prevState[i][el_class] = val;
+        this.db.child(prevState[i].key).update(update)
       }
     }
 
@@ -146,13 +150,18 @@ class App extends Component {
     let el_class = el.target.className;
     let parent_id = el.target.parentNode.parentNode.parentNode.id;
     let prevState = this.state.jobs;
+    let update = {}
     
     for(let i=0; i<prevState.length; i++){
-      if(parent_id === prevState[i].id){
+      if(Number(parent_id) === Number(prevState[i].id)){
         if(prevState[i][el_class] === true){
-          prevState[i][el_class] = false
+          prevState[i][el_class] = false;
+          update[el_class] = false;
+          this.db.child(prevState[i].key).update(update)
         } else {
-          prevState[i][el_class] = true
+          prevState[i][el_class] = true;
+          update[el_class] = true;
+          this.db.child(prevState[i].key).update(update)
         }
       }
     }
@@ -203,7 +212,6 @@ class App extends Component {
   remJob(el){
     let parent_id = el.target.parentNode.parentNode.id;
     let prevState = this.state.jobs;
-    console.log(parent_id);
 
     for(let i=0; i<prevState.length; i++) {
       if(prevState[i].id == parent_id) {
