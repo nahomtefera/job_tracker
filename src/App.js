@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import rem_icon from './images/rem_icon.png';
+import shrink_icon from './images/shrink_icon.png';
+import expand_icon from './images/expand_icon.png';
 import {DB_CONFIG} from './firebase.js';
 import firebase from "firebase/app";
 import 'firebase/database';
@@ -134,7 +136,7 @@ class App extends Component {
   }
 
   expand_info(el) {
-    let parent_id = el.target.parentNode.parentNode.id;
+    let parent_id = el.target.parentNode.parentNode.parentNode.id;
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
@@ -236,7 +238,7 @@ class App extends Component {
   }
 
   remJob(el){
-    let parent_id = el.target.parentNode.parentNode.id;
+    let parent_id = el.target.parentNode.parentNode.parentNode.id;
     let prevState = this.state.jobs;
 
     for(let i=0; i<prevState.length; i++) {
@@ -261,19 +263,20 @@ class App extends Component {
           {this.state.jobs.map((job)=>{
             return (
               <div className="job-main-container" id={job.id} key={"job-" + job.id}>
-                  {/* Rem job */}
-                  <div className={job.showNotes ? "fadeOut" :"rem-job"}> 
-                    <img src={rem_icon} onClick={this.remJob} alt="remove-job" />
-                  </div>
 
-                  {/* Expand Job */}
-                  <div className={job.showNotes ? "fadeOut" :"expand-job-icon"}> 
-                    <img onClick={this.expand_info} src="https://cdn3.iconfinder.com/data/icons/the-elegant-set/96/expand.png" alt="expand-job" />
-                  </div>
 
                   {/* Job Info */}
                   <div className={job.showNotes ? "fadeOut" : "job-info-container card-shadow container"}>
+                    {/* Rem job */}
+                    <div className={job.showNotes ? "fadeOut" :"rem-job"}> 
+                      <img src={rem_icon} onClick={this.remJob} alt="remove-job" />
+                    </div>
                     <h3 className="field-title">Job Info</h3>
+
+                    {/* Expand Job */}
+                    <div className={job.showNotes ? "fadeOut" :"expand-job-icon"}> 
+                      <img onClick={this.expand_info} src={job.expand_info ? shrink_icon : expand_icon} alt="expand-job" />
+                    </div>
                     <input className="title" placeholder="Title" value={job.title} onChange={this.handleChange} />
                     <input className="company" placeholder="Company" value={job.company} onChange={this.handleChange} />
                     <input className="location" placeholder="Location" value={job.location} onChange={this.handleChange} />

@@ -142,11 +142,12 @@
     position: absolute;
     right: 30px;
     z-index: 9;
-    top: 10px;
+    top: -3px;
 }
 
 .expand-job-icon img{
-    width: 20px;;
+    width: 45px;
+    cursor: pointer;
 }
 
 .expand-job-container {
@@ -169,6 +170,8 @@
 .job-info-container {
     display: block;
     min-height: 0px !important;
+    /* min-width: 968px;
+    max-width: 95%; */
 }
 
 .job-info-container input {
@@ -179,7 +182,7 @@
     background: none;
     font-weight: 400;
     /* text-transform: uppercase; */
-    width: 29%;
+    width: 25%;
     box-sizing: border-box;
 }
 
@@ -305,4 +308,22 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-width: 520px) {
+
+    .job-info-container input {
+        border: none;
+        font-size: 1em;
+        outline: none;
+        background: none;
+        font-weight: 400;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 14px 0;
+        padding-left: 20px;
+    }
 }
