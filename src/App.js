@@ -28,7 +28,7 @@ class App extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.showNotes = this.showNotes.bind(this);
     this.hideNotes = this.hideNotes.bind(this);
-
+    this.expand_info = this.expand_info.bind(this);
   }
   // Everytime we start the app
   // we will make an API call to firebase
@@ -71,6 +71,7 @@ class App extends Component {
         type: snap.val().type,
         offer: snap.val().offer,
         notes: snap.val().notes,
+        expand_info: false,
         showNotes: false
       });
       
@@ -124,6 +125,24 @@ class App extends Component {
           prevState[i].showNotes = true
         } else {
           prevState[i].showNotes = false
+        }
+      }
+    }
+    this.setState({
+      jobs: prevState
+    })
+  }
+
+  expand_info(el) {
+    let parent_id = el.target.parentNode.parentNode.id;
+    let prevState = this.state.jobs;
+
+    for(let i=0; i<prevState.length; i++) {
+      if(Number(parent_id) === Number(prevState[i].id)) {
+        if(prevState[i].expand_info === false) {
+          prevState[i].expand_info = true
+        } else {
+          prevState[i].expand_info = false
         }
       }
     }
@@ -206,6 +225,7 @@ class App extends Component {
       type: "",
       offer: "",
       notes: "",
+      expand_info: false,
       showNotes: false
     })
 
@@ -246,6 +266,10 @@ class App extends Component {
                     <img src={rem_icon} onClick={this.remJob} alt="remove-job" />
                   </div>
 
+                  {/* Expand Job */}
+                  <div className={job.showNotes ? "fadeOut" :"expand-job-icon"}> 
+                    <img onClick={this.expand_info} src="https://cdn3.iconfinder.com/data/icons/the-elegant-set/96/expand.png" alt="expand-job" />
+                  </div>
 
                   {/* Job Info */}
                   <div className={job.showNotes ? "fadeOut" : "job-info-container card-shadow container"}>
@@ -255,95 +279,97 @@ class App extends Component {
                     <input className="location" placeholder="Location" value={job.location} onChange={this.handleChange} />
                   </div>
 
-
-                  {/* Contact Info */}
-                  <div className= {job.showNotes ? "fadeOut" : "contact-info-container card-shadow container"}>
-                    <h3 className="field-title">Contact Info</h3>
-                    <input className="contact_name" placeholder="Contact Name" value={job.contact_name} onChange={this.handleChange} /> <br/>
-                    <input className="contact_email" placeholder="Contact Email" value={job.contact_email} onChange={this.handleChange} /> <br/>
-                    <input className="contact_phone" placeholder="Contact Phone" value={job.contact_phone} onChange={this.handleChange} /> <br/>
-                  </div>
-
-
-                  {/* Phone Interview */}
-                  <div className= {job.showNotes ? "fadeOut" : "phone-interview-container card-shadow container"}>
-                    <h3 className="field-title">Phone Interview</h3>
-                    <input className="phone_interview_date" placeholder="Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
-                    <input className="phone_interview_time" placeholder="Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
-                    <div className="checkbox-container">
-                      <label>Follow Up Email</label>
-                      <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_follow" checked = {job.phone_interview_follow ? "checked" : ""} /> <br/>
+                  <div className={job.expand_info ?  "expand-job-container" :"shrink-job"} id={job.id}> 
+                    {/* Contact Info */}
+                    <div className= {job.showNotes ? "fadeOut" : "contact-info-container card-shadow container"}>
+                      <h3 className="field-title">Contact Info</h3>
+                      <input className="contact_name" placeholder="Contact Name" value={job.contact_name} onChange={this.handleChange} /> <br/>
+                      <input className="contact_email" placeholder="Contact Email" value={job.contact_email} onChange={this.handleChange} /> <br/>
+                      <input className="contact_phone" placeholder="Contact Phone" value={job.contact_phone} onChange={this.handleChange} /> <br/>
                     </div>
-                    <div className="checkbox-container">
-                      <label>Thanks Email</label>
-                      <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_thanks" checked={job.phone_interview_thanks ? "checked" : ""} /> <br/>
+
+
+                    {/* Phone Interview */}
+                    <div className= {job.showNotes ? "fadeOut" : "phone-interview-container card-shadow container"}>
+                      <h3 className="field-title">Phone Interview</h3>
+                      <input className="phone_interview_date" placeholder="Date" value={job.phone_interview_date} onChange={this.handleChange} /> <br/>
+                      <input className="phone_interview_time" placeholder="Time" value={job.phone_interview_time} onChange={this.handleChange} /> <br/>
+                      <div className="checkbox-container">
+                        <label>Follow Up Email</label>
+                        <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_follow" checked = {job.phone_interview_follow ? "checked" : ""} /> <br/>
+                      </div>
+                      <div className="checkbox-container">
+                        <label>Thanks Email</label>
+                        <input type="checkbox" onChange={this.handleCheckbox} className="phone_interview_thanks" checked={job.phone_interview_thanks ? "checked" : ""} /> <br/>
+                      </div>
                     </div>
-                  </div>
 
 
-                  {/* Skype Interview */}
-                  <div className={job.showNotes ? "fadeOut" : "skype-interview-container card-shadow container"}>
-                    <h3 className="field-title">Skype Interview</h3>
-                    <input className="skype_interview_date" placeholder="Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
-                    <input className="skype_interview_time" placeholder="Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
-                    <div className="checkbox-container">
-                      <label>Follow Up Email</label>
-                      <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_follow" checked={job.skype_interview_follow ? "checked" : ""} /> <br/>
+                    {/* Skype Interview */}
+                    <div className={job.showNotes ? "fadeOut" : "skype-interview-container card-shadow container"}>
+                      <h3 className="field-title">Skype Interview</h3>
+                      <input className="skype_interview_date" placeholder="Date" value={job.skype_interview_date} onChange={this.handleChange} /> <br/>
+                      <input className="skype_interview_time" placeholder="Time" value={job.skype_interview_time} onChange={this.handleChange} /> <br/>
+                      <div className="checkbox-container">
+                        <label>Follow Up Email</label>
+                        <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_follow" checked={job.skype_interview_follow ? "checked" : ""} /> <br/>
+                      </div>
+                      <div className="checkbox-container">
+                        <label>Thanks Email</label>
+                        <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_thanks" checked={job.skype_interview_thanks ? "checked" : ""} /> <br/>
+                      </div>
                     </div>
-                    <div className="checkbox-container">
-                      <label>Thanks Email</label>
-                      <input type="checkbox" onChange={this.handleCheckbox} className="skype_interview_thanks" checked={job.skype_interview_thanks ? "checked" : ""} /> <br/>
+
+
+
+                    {/* On Site Interview */}
+                    <div className={job.showNotes ? "fadeOut" : "onsite-interview-container card-shadow container"}>
+                      <h3 className="field-title">On Site Interview</h3>
+                      <input className="onsite_interview_date" placeholder="Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
+                      <input className="onsite_interview_time" placeholder="Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
+                      <div className="checkbox-container">
+                        <label>Follow Up Email</label>
+                        <input type="checkbox" onChange={this.handleCheckbox} className="onsite_interview_follow" checked={job.onsite_interview_follow ? "checked" : ""} /> <br/>
+                      </div>
+                      <div className="checkbox-container">
+                        <label>Thanks Email</label>
+                        <input type="checkbox" onChange={this.handleCheckbox} className="onsite_interview_thanks" checked={job.onsite_interview_thanks ? "checked" : ""} /> <br/>
+                      </div>
                     </div>
-                  </div>
+                    <br/>
 
+                    {/* Benefits */}
+                    <div className={job.showNotes ? "fadeOut" : "type-container card-shadow container"}>
+                      <h3 className="field-title">Job Type</h3>
+                      <input className="type" placeholder="Full-Time, Contract..." value={job.type} onChange={this.handleChange} /> <br/>
+                    </div>  
 
+                    {/* Benefits */}
+                    <div className={job.showNotes ? "fadeOut" : "benefits-container card-shadow container"}>
+                      <h3 className="field-title">Benefits</h3>
+                      <input className="benefits" placeholder="PTO, Gym, Dental..." value={job.benefits} onChange={this.handleChange} /> <br/>
+                    </div>                  
 
-                  {/* On Site Interview */}
-                  <div className={job.showNotes ? "fadeOut" : "onsite-interview-container card-shadow container"}>
-                    <h3 className="field-title">On Site Interview</h3>
-                    <input className="onsite_interview_date" placeholder="Date" value={job.onsite_interview_date} onChange={this.handleChange} /> <br/>
-                    <input className="onsite_interview_time" placeholder="Time" value={job.onsite_interview_time} onChange={this.handleChange} /> <br/>
-                    <div className="checkbox-container">
-                      <label>Follow Up Email</label>
-                      <input type="checkbox" onChange={this.handleCheckbox} className="onsite_interview_follow" checked={job.onsite_interview_follow ? "checked" : ""} /> <br/>
+                    {/* Offer */}
+                    <div className={job.showNotes ? "fadeOut" : "offer-container card-shadow container"}>
+                      <h3 className="field-title">Offer</h3>
+                      <input className="offer" placeholder="$96,000 - $50/h" value={job.offer} onChange={this.handleChange} /> <br/>
                     </div>
-                    <div className="checkbox-container">
-                      <label>Thanks Email</label>
-                      <input type="checkbox" onChange={this.handleCheckbox} className="onsite_interview_thanks" checked={job.onsite_interview_thanks ? "checked" : ""} /> <br/>
+
+                    {/* Show Notes */}
+                    <div className={job.showNotes? "fadeOut" : "show-notes-button"} onClick={this.showNotes}> 
+                      Notes » 
                     </div>
+
+                    {/* Notes */}
+                    <div className={job.showNotes ? "notes-container notes-modal container" : "hide-notes"}>
+                      <div className={job.showNotes? "hide-notes-button" : ""} onClick={this.hideNotes}>«</div>
+                      <h3 className="field-title">Notes</h3>
+                      <textarea className="notes" placeholder="Job description, cover letter, notes..." value={job.notes} onChange={this.handleChange} /> <br/>
+                    </div>
+
                   </div>
-                  <br/>
-
-                  {/* Benefits */}
-                  <div className={job.showNotes ? "fadeOut" : "type-container card-shadow container"}>
-                    <h3 className="field-title">Job Type</h3>
-                    <input className="type" placeholder="Full-Time, Contract..." value={job.type} onChange={this.handleChange} /> <br/>
-                  </div>  
-
-                  {/* Benefits */}
-                  <div className={job.showNotes ? "fadeOut" : "benefits-container card-shadow container"}>
-                    <h3 className="field-title">Benefits</h3>
-                    <input className="benefits" placeholder="PTO, Gym, Dental..." value={job.benefits} onChange={this.handleChange} /> <br/>
-                  </div>                  
-
-                  {/* Offer */}
-                  <div className={job.showNotes ? "fadeOut" : "offer-container card-shadow container"}>
-                    <h3 className="field-title">Offer</h3>
-                    <input className="offer" placeholder="$96,000 - $50/h" value={job.offer} onChange={this.handleChange} /> <br/>
-                  </div>
-
-                  {/* Show Notes */}
-                  <div className={job.showNotes? "fadeOut" : "show-notes-button"} onClick={this.showNotes}> 
-                    Notes » 
-                  </div>
-
-                  {/* Notes */}
-                  <div className={job.showNotes ? "notes-container notes-modal container" : "hide-notes"}>
-                    <div className={job.showNotes? "hide-notes-button" : ""} onClick={this.hideNotes}>«</div>
-                    <h3 className="field-title">Notes</h3>
-                    <textarea className="notes" placeholder="Job description, cover letter, notes..." value={job.notes} onChange={this.handleChange} /> <br/>
-                  </div>
-
+                  
               </div>
             )
           })}
