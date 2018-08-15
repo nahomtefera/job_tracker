@@ -271,7 +271,7 @@ class App extends Component {
                     <div className={job.showNotes ? "fadeOut" :"rem-job"}> 
                       <img src={rem_icon} onClick={this.remJob} alt="remove-job" />
                     </div>
-                    <h3 className="field-title">Job Info</h3>
+                    <h3 className="field-title">{job.title != "" && job.company != "" ? <div><span style={{fontWeight:"bold"}}>{job.title}</span>  at <span style={{fontWeight:"bold"}}>{job.company}</span></div> : "Job Info"}</h3>
 
                     {/* Expand Job */}
                     <div className={job.showNotes ? "fadeOut" :"expand-job-icon"}> 
